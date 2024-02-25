@@ -11,4 +11,5 @@ class Book(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    thumbnail = models.ImageField(upload_to='blog_thumbnails/', blank=True, null=True)
 

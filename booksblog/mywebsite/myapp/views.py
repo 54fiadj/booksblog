@@ -46,11 +46,16 @@ def get_book_detail(request, pk):
     serializer = BookSerializer(book, context={'request': request})
     return JsonResponse(serializer.data)
 
+
+
 def get_blogs(request):
     # New API endpoint to fetch blogs data
+    base_url = get_base_url(request)
     blogs = [{'id': blog.id,
               'title': blog.title,
-              'content': blog.content} for blog in Blog.objects.all()]
+              'content': blog.content,
+              'thumbnail': base_url + settings.MEDIA_URL + str(blog.thumbnail) if blog.thumbnail else None} 
+              for blog in Blog.objects.all()]
     return JsonResponse({'blogs': blogs})
 
 
