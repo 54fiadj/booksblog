@@ -62,6 +62,5 @@ def get_blogs(request):
 def get_blog_detail(request, pk):
     # API endpoint to fetch details of a single blog
     blog = get_object_or_404(Blog, pk=pk)
-    serializer = BlogSerializer(blog)
-
+    serializer = BlogSerializer(blog, context={'request': request})
     return JsonResponse(serializer.data)
